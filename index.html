@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подслушано в Звездном | Команда Чучуки</title>
+
+    <style>/* Общие стили */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Nunito', sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f9f9f9;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+
+    /* Шапка */
+    header {
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        color: white;
+        padding: 2rem 0;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+        font-family: 'Comic Neue', cursive;
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    header p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+    }
+
+    /* Навигация */
+    nav {
+        background-color: #FFD700;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    nav ul {
+        display: flex;
+        list-style: none;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    nav li {
+        margin: 0;
+    }
+
+    nav a {
+        display: block;
+        padding: 1rem 1.5rem;
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        border-bottom: 3px solid transparent;
+    }
+
+    nav a:hover, nav a.active {
+        background-color: #FFC400;
+        border-bottom: 3px solid #1e3c72;
+    }
+
+    /* Основной контент */
+    main {
+        padding: 2rem 0;
+    }
+
+    .section {
+        display: none;
+        animation: fadeIn 0.5s ease;
+    }
+
+    .active-section {
+        display: block;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* Приветственная секция */
+    .welcome-section {
+        text-align: center;
+        padding: 2rem 0;
+    }
+
+    .welcome-section h2 {
+        color: #2a5298;
+        margin-bottom: 1.5rem;
+        font-size: 2rem;
+    }
+
+    .camp-image {
+        height: 300px;
+        background: linear-gradient(rgba(30, 60, 114, 0.7), rgba(42, 82, 152, 0.7)),
+        url('https://via.placeholder.com/800x400/87CEEB/FFFFFF?text=Лагерь+Звездный') center/cover;
+        border-radius: 10px;
+        margin: 1.5rem 0;
+    }
+
+    .welcome-section p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto;
+        color: #555;
+    }
+
+    /* Галерея */
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .gallery-item {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .gallery-item p {
+        padding: 1rem;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    /* Разборы комнат */
+    .room-reports {
+        margin-top: 1.5rem;
+    }
+
+    .report {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .report h3 {
+        color: #2a5298;
+        margin-bottom: 1rem;
+    }
+
+    .room-image {
+        height: 200px;
+        background: #f0f0f0;
+        border-radius: 5px;
+        margin-top: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #888;
+    }
+
+    /* Срывы уроков физики */
+    .physics-incidents {
+        margin-top: 1.5rem;
+    }
+
+    .incident {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #FFD700;
+    }
+
+    .incident h3 {
+        color: #2a5298;
+        margin-bottom: 1rem;
+    }
+
+    /* О команде */
+    .team-info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        margin-top: 1.5rem;
+    }
+
+    .team-description {
+        flex: 1;
+        min-width: 300px;
+    }
+
+    .team-description ul {
+        margin: 1rem 0;
+        padding-left: 1.5rem;
+    }
+
+    .team-description li {
+        margin-bottom: 0.5rem;
+    }
+
+    .team-photo {
+        flex: 1;
+        min-width: 300px;
+    }
+
+    .placeholder-photo {
+        height: 300px;
+        background: #f0f0f0;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #888;
+        font-style: italic;
+    }
+
+    /* Подвал */
+    footer {
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+        header h1 {
+            font-size: 2rem;
+        }
+
+        nav ul {
+            flex-direction: column;
+        }
+
+        nav a {
+            padding: 0.8rem 1rem;
+            text-align: center;
+        }
+
+        .gallery {
+            grid-template-columns: 1fr;
+        }
+
+        .team-info {
+            flex-direction: column;
+        }
+    }
+
+    /* Специальные эффекты для Чучуков */
+    .chuchuki-special {
+        position: relative;
+    }
+
+    .chuchuki-special::after {
+        content: "✨";
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 1.5rem;
+    }
+
+    h2::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(to right, #FFD700, #2a5298);
+        border-radius: 3px;
+    }</style>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>Подслушано в Звездном</h1>
+        <p>Все проделки команды "Чучуки"</p>
+    </div>
+</header>
+
+<nav>
+    <div class="container">
+        <ul>
+            <li><a href="#home" class="active">Главная</a></li>
+            <li><a href="#photos">Фотки</a></li>
+            <li><a href="#rooms">Разборы комнат</a></li>
+            <li><a href="#physics">Срывы уроков физики</a></li>
+            <li><a href="#about">О команде</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main class="container">
+    <section id="home" class="active-section">
+        <div class="welcome-section">
+            <h2>Добро пожаловать в мир Чучуков!</h2>
+            <div class="camp-image"></div>
+            <p>Здесь собраны все самые веселые и безумные моменты из жизни команды "Чучуки" в лагере "Звездный"!</p>
+        </div>
+    </section>
+
+    <section id="photos" class="section">
+        <h2>Фотки Чучуков</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/300x200/FFD700/000000?text=Чучуки+на+прогулке" alt="Чучуки на прогулке">
+                <p>Чучуки исследуют лес</p>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/300x200/87CEEB/000000?text=Чучуки+на+пляже" alt="Чучуки на пляже">
+                <p>Водные процедуры по-чучучьи</p>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/300x200/98FB98/000000?text=Чучуки+в+столовой" alt="Чучуки в столовой">
+                <p>Завтрак с приключениями</p>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/300x200/FFB6C1/000000?text=Чучуки+на+дискотеке" alt="Чучуки на дискотеке">
+                <p>Танцы до упаду</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="rooms" class="section">
+        <h2>Разборы комнат</h2>
+        <div class="room-reports">
+            <div class="report">
+                <h3>Комната №5 - "Берлога Чучуков"</h3>
+                <p>После ночного рейда на кухню комната превратилась в поле битвы с печеньем. Найдены следы сахара на всех поверхностях.</p>
+                <div class="room-image"></div>
+            </div>
+            <div class="report">
+                <h3>Комната №7 - "Лаборатория безумия"</h3>
+                <p>Эксперименты с зубной пастой и блестками привели к созданию нового вида искусства. Воспитатель в шоке!</p>
+                <div class="room-image"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="physics" class="section">
+        <h2>Срывы уроков физики</h2>
+        <div class="physics-incidents">
+            <div class="incident">
+                <h3>Эксперимент с маятником</h3>
+                <p>Попытка создать вечный двигатель из маятника и резинок закончилась запуском учебника в окно. Учитель физики плакал от смеха.</p>
+            </div>
+            <div class="incident">
+                <h3>Закон Архимеда по-чучучьи</h3>
+                <p>Вместо стандартного эксперимента с вытеснением воды, Чучуки устроили битву на лодках из пластиковых бутылок в бассейне.</p>
+            </div>
+            <div class="incident">
+                <h3>Электрическая цепь</h3>
+                <p>Собирая простую цепь, Чучуки подключили так много элементов, что лампочка светилась ярче солнца. Пол-лагеря осталось без света.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <h2>О команде "Чучуки"</h2>
+        <div class="team-info">
+            <div class="team-description">
+                <p>Команда "Чучуки" - самая веселая и непредсказуемая команда лагеря "Звездный". Мы специализируемся на:</p>
+                <ul>
+                    <li>Создании хаоса с улыбкой</li>
+                    <li>Превращении скучных занятий в приключения</li>
+                    <li>Изобретении новых способов веселиться</li>
+                    <li>Дружбе и поддержке друг друга</li>
+                </ul>
+                <p>Наш девиз: "Чем больше беспорядка, тем веселее!"</p>
+            </div>
+            <div class="team-photo">
+                <div class="placeholder-photo"></div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>© 2023 Подслушано в Звездном. Все права защищены (или нет, мы же Чучуки!)</p>
+    </div>
+</footer>
+
+<script>// Навигация по разделам
+document.addEventListener('DOMContentLoaded', function() {
+    // Получаем все ссылки навигации
+    const navLinks = document.querySelectorAll('nav a');
+    // Получаем все секции
+    const sections = document.querySelectorAll('.section');
+
+    // Функция для переключения активной секции
+    function setActiveSection(sectionId) {
+        // Скрываем все секции
+        sections.forEach(section => {
+            section.classList.remove('active-section');
+        });
+
+        // Показываем активную секцию
+        document.getElementById(sectionId).classList.add('active-section');
+
+        // Обновляем активную ссылку в навигации
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${sectionId}`) {
+                link.classList.add('active');
+            }
+        });
+
+        // Сохраняем активную секцию в localStorage
+        localStorage.setItem('activeSection', sectionId);
+    }
+
+    // Обработчик кликов по навигации
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const sectionId = this.getAttribute('href').substring(1);
+            setActiveSection(sectionId);
+
+            // Плавная прокрутка к началу страницы
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Восстанавливаем активную секцию из localStorage при загрузке
+    const savedSection = localStorage.getItem('activeSection') || 'home';
+    setActiveSection(savedSection);
+
+    // Добавляем случайные эффекты для элементов с классом chuchuki-special
+    const specialElements = document.querySelectorAll('.chuchuki-special');
+    specialElements.forEach(element => {
+        element.addEventListener('mouseenter', function() {
+            this.style.transform = 'rotate(5deg)';
+        });
+
+        element.addEventListener('mouseleave', function() {
+            this.style.transform = 'rotate(0deg)';
+        });
+    });
+
+    // Анимация появления элементов при прокрутке
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Наблюдаем за элементами галереи и инцидентами
+    const animatedElements = document.querySelectorAll('.gallery-item, .incident, .report');
+    animatedElements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(element);
+    });
+
+    // Случайный генератор контента для демонстрации
+    function generateRandomContent() {
+        const physicsTitles = [
+            "Неудачный опыт с сухим льдом",
+            "Взрыв шарика с гелием",
+            "Создание ракеты из бутылки",
+            "Магнитный хаос",
+            "Оптическая иллюзия по-чучучьи"
+        ];
+
+        const roomTitles = [
+            "Комната №3 - 'Гнездо орлов'",
+            "Комната №8 - 'Штаб коварства'",
+            "Комната №12 - 'Логово сладкоежек'",
+            "Комната №6 - 'Лабиринт сюрпризов'"
+        ];
+
+        // Здесь можно добавить логику для генерации случайного контента
+        // если потребуется в будущем
+    }
+
+    // Инициализация генератора контента
+    generateRandomContent();
+
+    // Добавляем эффект параллакса для фонового изображения
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.camp-image');
+
+        parallaxElements.forEach(element => {
+            const rate = scrolled * -0.5;
+            element.style.transform = `translateY(${rate}px)`;
+        });
+    });
+});</script>
+</body>
+</html>
